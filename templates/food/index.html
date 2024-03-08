@@ -284,7 +284,7 @@
                                     </div>
                                     <div class="cost__btn">
                                         <div class="box__cost">{{ p.price|intcomma }} UZS</div>
-                                        <button class="box__btn" onclick="cart_add({{ p.id }}, {{ p.price }})"><img src="{% static 'food/img/plus.png' %}" alt=""/> <span class="cart-item"></span>
+                                        <button class="box__btn" onclick="cart_add({{ p.id }})"><img src="{% static 'food/img/plus.png' %}" alt=""/> <span class="cart-item"></span>
                                     </button>
                                     </div>
                                 </div>
@@ -650,7 +650,7 @@
             total_price.setAttribute("data-id", 0);
         }
 
-        function cart_add(product_id, product_price) {
+        function cart_add(product_id) {
             orders_list = document.getElementById("order-list");
             total_price = document.getElementById("total_price");
             home_price = document.getElementById("home_price");
@@ -670,7 +670,7 @@
                         },
                         success: function(response) {
                             if (num == 0) {
-                                price = parseInt(getCookie("total_price")) + parseInt(product_price);
+                                price = parseInt(getCookie("total_price")) + parseInt(response['price']);
                                 setCookie("total_price", price);
                                 num+=1
                             }
